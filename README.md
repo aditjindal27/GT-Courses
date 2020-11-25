@@ -12,5 +12,6 @@ This website solves this problem by providing:
 
 To use the website, visit:
 
-http://gtcourses.herokuapp.com/ - information on professors
-http://gtcourses.herokuapp.com/info - prereqs and class description
+1. http://gtcourses.herokuapp.com/ - information on professors
+
+2. http://gtcourses.herokuapp.com/info - prereqs and class description
