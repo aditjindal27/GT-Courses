@@ -15,3 +15,7 @@ To use the website, visit:
 1. http://gtcourses.herokuapp.com/ - information on professors
 
 2. http://gtcourses.herokuapp.com/info - prereqs and class description
+
+# About
+
+The web-application was made in Django. Webscraping was done using BeautifulSoup library in python.
