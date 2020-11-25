@@ -1,0 +1,25 @@
+{%extends 'base.html'%}
+
+{% block content%}
+<style>
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+}
+</style>
+<h2>CLASS INFORMATION TOOL </h2> <br><br>
+
+This tool uses data from Oscar to give class description and an easy to understand list of pre-requisites.
+<br><br><br>
+<form action="getInfo" method='post'>
+
+    {% csrf_token %}
+
+    <b>ENTER CLASS CODE:</b> <br><br>
+    For example: CS 1331<br><br>
+    <input type="text" name="className"><br><br>
+    <input type="submit">
+
+</form>
+
+{% endblock %}

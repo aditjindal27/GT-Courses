@@ -1,0 +1,21 @@
+{%extends 'base.html'%}
+
+{% block content%}
+<style>
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+}
+</style>
+<h2>Error </h2> 
+
+You might have entered the class name in the wrong format. Make sure to have a space between subject code and class number. Eg: CS 1331 and not CS1331.
+<br><br>
+OR
+<br><br>
+
+The server might be down. Try again later. 
+<br><br>
+<button onclick="javascript:history.go(-1);">Previous Page</button>
+
+{% endblock %}

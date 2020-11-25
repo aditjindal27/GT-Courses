@@ -1,0 +1,149 @@
+{%extends 'base.html'%}
+
+{% block content%}
+<!-- <button onclick="javascript:history.go(-1);">Previous Page</button> -->
+<h1>{{obj.className}}</h1>
+<br>
+<b>AVERAGE GPA: {{obj.avggpa}}</b>
+<br><br><br>
+<b>Click the headings of the table to sort the data.</b>
+<br><br>
+<b>Click professor name to see their reviews.</b>
+<br><br>
+<b>If the table is distorted, just click the heading.</b>
+<br><br>
+<style>
+  button {
+    position: fixed;
+    right: 0;
+    margin-bottom: 10;
+    margin-top: 10;
+    display:inline-block;
+    padding: 0.35em 1.2em;
+    border:0.1em solid black;
+    margin:0 0.3em 0.3em 0;
+    border-radius:0.12em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-weight:300;
+    color:white;
+    text-align:center;
+    transition: all 0.2s;
+    background-color: #003057;
+    border-radius: 2em;
+  } 
+     
+  h1 {
+    font-size: 45;
+  }
+    b {
+      font-size: 20;
+    }
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    table {
+        border-collapse: collapse;
+        background-clip: padding-box;
+    }
+    table, th, td {
+      width:100%;
+      border-spacing: 50;
+      border: 3px solid #003057;
+    }
+    a {
+      text-decoration: none; 
+      background-color: none;
+      color: black ;
+    }
+    td {
+      padding: 5%;
+      text-align: center;
+      font-size: large;
+    } 
+    th {
+        padding: 5%;
+        text-align: center;
+        color: #3a4660;
+        font-size: 20;
+    }
+    </style>
+<table id="myTable">
+    <tr>
+        <th><b>PROFESSORS</b></th>
+        <th onclick="sortTable(1)"><b>GPAs</b></th>
+        <th onclick="sortTable(2)"><b>RMP</b></th>
+    </tr>
+    {% for profs, gpas, rmps, link in z %}
+    <tr>
+        <td><a href="{{link}}">{{profs}}</a></td>
+        <td>{{gpas}}</td>
+        <td>{{rmps}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+<script>
+    function sortTable(n) {
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("myTable");
+        switching = true;
+        // Set the sorting direction to ascending:
+        dir = "desc"; 
+        /* Make a loop that will continue until
+        no switching has been done: */
+        while (switching) {
+          // Start by saying: no switching is done:
+          switching = false;
+          rows = table.rows;
+          /* Loop through all table rows (except the
+          first, which contains table headers): */
+          for (i = 1; i < (rows.length - 1); i++) {
+            // Start by saying there should be no switching:
+            shouldSwitch = false;
+            /* Get the two elements you want to compare,
+            one from current row and one from the next: */
+            x = rows[i].getElementsByTagName("TD")[n];
+            y = rows[i + 1].getElementsByTagName("TD")[n];
+            /* Check if the two rows should switch place,
+            based on the direction, asc or desc: */
+            a = x.innerHTML
+            b = y.innerHTML
+            if (a == 'N/A') {
+                a = -1
+            } 
+            if (b == 'N/A') {
+                b = -1
+            }
+            if (dir == "asc") {
+                if (Number(a) > Number(b)) {
+                    shouldSwitch = true;
+                    break;
+                }
+            } else if (dir == "desc") {
+              if (Number(a) < Number(b)) {
+                shouldSwitch = true;
+                break;
+                }
+            }
+          }
+          if (shouldSwitch) {
+            /* If a switch has been marked, make the switch
+            and mark that a switch has been done: */
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+            // Each time a switch is done, increase this count by 1:
+            switchcount ++; 
+          } else {
+            /* If no switching has been done AND the direction is "asc",
+            set the direction to "desc" and run the while loop again. */
+            if (switchcount == 0 && dir == "desc") {
+              dir = "asc";
+              switching = true;
+            }
+          }
+        }
+    }
+</script>
+{% endblock %}

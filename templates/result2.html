@@ -1,0 +1,60 @@
+{%extends 'base.html'%}
+
+{% block content%}
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    p {
+        text-align: right;
+    }
+    table {
+        border-collapse: collapse;
+        background-clip: padding-box;
+        table-layout: auto;
+    }
+    table, th, td {
+      width:100%;
+      border-spacing: 50;
+      border: 3px solid #3a4660;
+    }
+    td {
+      padding: 5%;
+      text-align: center;
+      font-size: large;
+      width: auto;
+    } 
+    th {
+        text-align: center;
+        color: #003057;
+        font-size: larger;
+        width: auto;
+    }
+</style>
+
+<h1>{{obj.n}}:</h1>
+<h2>{{obj.credit}} CREDIT HOURS</h2>
+<!-- <p><input type="reset" value="Previous Page" onClick="javascript:history.go(-1);"></p> -->
+<b>Course description: </b>
+<br><br>
+{{obj.desc}}
+<br><br>
+<b>Prerequisites: </b>
+<br><br>
+Classes in one row are alternatives. You only need one of them. Classes in different rows are all required.
+<br><br>
+<table id="myTable">
+    <tr>
+        <th><b>INDEX</b></th>
+        <th><b>CLASSES REQUIRED</b></th>
+    </tr>
+    {% for index, classes in obj.dec.items %}
+    <tr>
+        <td>{{index}}</td>
+        <td>{{classes}}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+{% endblock %}
